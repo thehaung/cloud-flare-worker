@@ -50,3 +50,19 @@ func GetCloudFlareAPIToken() string {
 func GetCloudFlareZoneID() string {
 	return os.Getenv("CLOUD_FLARE_ZONE_ID")
 }
+
+func IsEnableLimiter() bool {
+	res, err := strconv.ParseBool(os.Getenv("ENABLE_LIMITER"))
+	if err != nil {
+		return false
+	}
+	return res
+}
+
+func IsEnableLogger() bool {
+	res, err := strconv.ParseBool(os.Getenv("ENABLE_LOGGER"))
+	if err != nil {
+		return false
+	}
+	return res
+}
