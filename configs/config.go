@@ -6,7 +6,13 @@ import (
 )
 
 func GetEnvironment() string {
-	return os.Getenv("ENV")
+	env := os.Getenv("ENVIRONMENT")
+
+	if len(env) > 0 && (env == "prod" || env == "non-prod") {
+		return env
+	}
+
+	return "prod"
 }
 
 func GetTimeDeadlineAPI() int {

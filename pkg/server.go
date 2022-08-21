@@ -3,8 +3,10 @@ package pkg
 import (
 	"fmt"
 	"github.com/gofiber/helmet/v2"
+	"github.com/joho/godotenv"
 	"github.com/thehaung/cloudflare-worker/configs"
 	"github.com/thehaung/cloudflare-worker/util"
+	"log"
 	"os"
 
 	"github.com/gofiber/fiber/v2"
@@ -64,4 +66,12 @@ func Listen(app *fiber.App) error {
 
 	serverPort := configs.GetServerPort()
 	return app.Listen(fmt.Sprintf(":%s", serverPort))
+}
+
+func InitEnv() {
+	env := configs.GetEnvironment()
+
+	if err := godotenv.Load(fmt.Sprintf("deployemnts/%s/.env", env)); err != nil {
+		log.Fatalf("Error while loading Env: %v", err)
+	}
 }
