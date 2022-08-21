@@ -1,7 +1,8 @@
-package config
+package test
 
 import (
 	"fmt"
+	"github.com/thehaung/cloudflare-worker/configs"
 	"log"
 	"os"
 	"testing"
@@ -37,7 +38,7 @@ func TestConfig(t *testing.T) {
 		return
 	}
 
-	config := NewConfig()
+	config := configs.NewConfig()
 
 	mongoURI := fmt.Sprintf("mongodb+srv://%s:%s@%s",
 		"john",

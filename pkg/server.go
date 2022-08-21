@@ -3,7 +3,7 @@ package pkg
 import (
 	"fmt"
 	"github.com/gofiber/helmet/v2"
-	"github.com/thehaung/cloudflare-worker/config"
+	"github.com/thehaung/cloudflare-worker/configs"
 	"github.com/thehaung/cloudflare-worker/pkg/utils"
 	"os"
 
@@ -62,6 +62,6 @@ func Listen(app *fiber.App) error {
 		return c.SendStatus(404)
 	})
 
-	serverPort := config.GetServerPort()
+	serverPort := configs.GetServerPort()
 	return app.Listen(fmt.Sprintf(":%s", serverPort))
 }
