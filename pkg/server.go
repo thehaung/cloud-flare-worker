@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/gofiber/helmet/v2"
 	"github.com/thehaung/cloudflare-worker/configs"
-	"github.com/thehaung/cloudflare-worker/pkg/utils"
+	"github.com/thehaung/cloudflare-worker/util"
 	"os"
 
 	"github.com/gofiber/fiber/v2"
@@ -36,12 +36,12 @@ func Create() *fiber.App {
 	app := fiber.New(fiber.Config{
 		// Override default error handler
 		ErrorHandler: func(ctx *fiber.Ctx, err error) error {
-			if e, ok := err.(*utils.Error); ok {
+			if e, ok := err.(*util.Error); ok {
 				return ctx.Status(e.Status).JSON(e)
 			} else if e, ok := err.(*fiber.Error); ok {
-				return ctx.Status(e.Code).JSON(utils.Error{Status: e.Code, Code: "internal-server", Message: e.Message})
+				return ctx.Status(e.Code).JSON(util.Error{Status: e.Code, Code: "internal-server", Message: e.Message})
 			} else {
-				return ctx.Status(500).JSON(utils.Error{Status: 500, Code: "internal-server", Message: err.Error()})
+				return ctx.Status(500).JSON(util.Error{Status: 500, Code: "internal-server", Message: err.Error()})
 			}
 		},
 	})
