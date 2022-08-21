@@ -1,1 +1,4 @@
 .idea
+
+deployments/non-prod/.env
+deployments/prod/.env
